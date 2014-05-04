@@ -19,7 +19,7 @@
             </div>
             
             <ul class="list-inline">
-                <input type="submit" class="btn btn-primary" value="Einloggen" />
+                <input type="submit" class="btn btn-primary" name="login" value="Einloggen" />
                 <a class="a margin-left10" href="{{ url_for('usermgmt.register', next=request.args.get('next')) }}">zur Registrierung</a>
                 <a class="a margin-left10" href="{{ url_for('usermgmt.password_reset', next=request.args.get('next')) }}">Passwort vergessen</a>
             </ul>

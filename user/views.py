@@ -14,7 +14,7 @@ from server import db, lm
 from models import User
 from forms import LoginForm, RegisterForm, SettingsForm
 from forms import PasswordResetForm, PasswordChangeForm, DeleteUserForm
-
+from utils import create_json_response
 
 
 
@@ -87,22 +87,22 @@ def login():
     if g.user and g.user.is_authenticated():
         return redirect(request.args.get('next') or url_for('index'))
     loginform = LoginForm()
-    if loginform.validate_on_submit():
+    if 'login' in request.form and loginform.validate_on_submit():
         session['remember_me'] = loginform.remember_me.data
         user = loginform.get_user()
         login_user(user)
         return redirect(request.args.get('next') or url_for('index'))
-    # if request.method == 'POST':
-    #     try:
-    #         data = request.json
-    #         user = User.query.filter(User.mail==data['mail']).one()
-    #         print user
-    #         if user and user.check_password(data['password']):
-    #             login_user(user)
-    #             return make_response(jsonify({}), 200)
-    #     except Exception, e:
-    #         return make_response(jsonify({}), 300)
-    # return make_response(jsonify({}), 300)
+    elif request.method == 'POST':
+        try:
+            data = request.json
+            user = User.query.filter(User.mail==data['mail']).one()
+            print user
+            if user and user.check_password(data['password']):
+                login_user(user)
+                return create_json_response({'login': True}, 200)
+        except Exception, e:
+            return create_json_response({'login': False}, 300)
+        return create_json_response({'login': False}, 300)
 
     return render_template('user/login.html', form=loginform)
 

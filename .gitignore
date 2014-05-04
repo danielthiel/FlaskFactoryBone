@@ -2,6 +2,9 @@
 *.sublime-project
 *.sublime-workspace
 
+# Markdown compiled:
+README.html
+
 # Virtuel Environment VENV
 venv
 

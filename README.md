@@ -1,4 +1,4 @@
-# FactoryBone
+# FlaskFactoryBone
 A bone for a Flask app.
 
 
@@ -13,6 +13,8 @@ A bone for a Flask app.
 
 ## Todos
 This extensions should be implemented in this bone.
+
+### Need hard
 
 * Flask-Admin
 
@@ -30,3 +32,11 @@ This extensions should be implemented in this bone.
 * Flask-Security (?) the extension which replaced Flask-Login
 
 * OAuth / OpenID Exstensions
+
+* some File Upload handler
+
+* a logging config which everyone uses
+
+### Documentation
+
+* explain everything
