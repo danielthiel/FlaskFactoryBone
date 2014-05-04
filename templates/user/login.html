@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Login</h1>
+<div class="row">
+
+    <div class="col-sm-5">
+        <form role="form" action="" method="post" name="login">
+            {{form.hidden_tag()}}
+
+            <!-- userinput -->
+            <div class="form-group">
+                <label>Email-Adresse</label>
+                {{ form.mail(class_='form-control') }}
+            </div>
+            <div class="form-group">
+                <label>Passwort</label>
+                {{ form.password(class_='form-control') }}
+            </div>
+            
+            <ul class="list-inline">
+                <input type="submit" class="btn btn-primary" value="Einloggen" />
+                <a class="a margin-left10" href="{{ url_for('usermgmt.register', next=request.args.get('next')) }}">zur Registrierung</a>
+                <a class="a margin-left10" href="{{ url_for('usermgmt.password_reset', next=request.args.get('next')) }}">Passwort vergessen</a>
+            </ul>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div><!-- /.col-->
+
+
+</div><!-- /.row -->
+
+
+{% endblock %}

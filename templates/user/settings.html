@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+    
+    <div class="row">
+        <div class="col-md-5">
+
+            <h1>Einstellungen ändern</h1>
+            <form role="form" action="" method="post" name="settings_change">
+                {{set_form.hidden_tag()}}
+
+                <!-- userinput -->
+                <div class="form-group">
+                    <label>aktueller Name: {{ g.user.name }}</label>
+                    {{ set_form.name(class_='form-control') }}
+                </div>
+
+                <!-- error -->
+
+
+                <!-- submit -->
+                
+                <ul class="list-inline">
+                    <input type="submit" class="btn btn-primary" name="settings_change" value="Einstellungen ändern">
+                    <a class="a margin-left10" href="{{ url_for('usermgmt.delete_user', next=request.args.get('next')) }}">Account löschen</a>
+                </ul>
+            </form>
+
+
+
+            <h1>Passwort ändern</h1>
+            <form role="form" action="" method="post" name="pw_change">
+                {{pw_form.hidden_tag()}}
+
+                <!-- userinput -->
+                <div class="form-group">
+                    <label>aktuelles Passwort</label>
+                    {{ pw_form.current_password(class_='form-control') }}
+                </div>
+                <div class="form-group">
+                    <label>Neues Password</label>
+                    {{ pw_form.new_password(class_='form-control') }}
+                </div>
+                <div class="form-group">
+                    <label>Neues Password (wiederholen)</label>
+                    {{ pw_form.confirm_password(class_='form-control') }}
+                </div>
+
+                <!-- error -->
+                {% for error in pw_form.errors.current_password %}
+                        <div class="alert alert-danger">
+                            {{error}}
+                        </div>
+                {% endfor %}
+                {% for error in pw_form.errors.new_password %}
+                        <div class="alert alert-danger">
+                            {{error}}
+                        </div>
+                {% endfor %}
+
+                {% for error in pw_form.errors.confirm_password %}
+                        <div class="alert alert-danger">
+                            {{error}}
+                        </div>
+                {% endfor %}
+
+
+                <!-- submit -->
+                <input type="submit" class="btn btn-primary" name="pw_change" value="Passwort ändern">
+            </form>
+    
+
+
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-info">{{ message }} </div>
+                        {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+        </div><!-- /.col-->
+    </div><!-- /.row -->
+    
+{% endblock %}
